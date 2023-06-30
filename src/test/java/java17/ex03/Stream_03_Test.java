@@ -30,7 +30,10 @@ public class Stream_03_Test {
 		List<Order> orders = new Data().getOrders();
 
 		// TODO Retrouver la commande avec le prix le plus élevé
-		Optional<Order> result = null;
+		Optional<Order> result = orders.stream()
+				.max(Comparator.comparingDouble(order ->
+						order.getPizzas().stream().mapToDouble(Pizza::getPrice).sum()
+				));
 
 		assertThat(result.isPresent(), is(true));
 		assertThat(result.get().getPrice(), is(2200.0));
@@ -42,7 +45,10 @@ public class Stream_03_Test {
 		List<Order> orders = new Data().getOrders();
 
 		// TODO Retrouver la commande avec le prix le moins élevé
-		Optional<Order> result = null;
+		Optional<Order> result = orders.stream()
+				.min(Comparator.comparingDouble(order ->
+						order.getPizzas().stream().mapToDouble(Pizza::getPrice).sum()
+				));
 
 		assertThat(result.isPresent(), is(true));
 		assertThat(result.get().getPrice(), is(1000.0));
@@ -55,7 +61,10 @@ public class Stream_03_Test {
 
 		// TODO construire une chaîne contenant les prénoms des clients triés et séparés
 		// par le caractère "|"
-		String result = null;
+		String result = customers.stream()
+				.map(Customer::getFirstname)
+				.sorted()
+				.collect(Collectors.joining("|"));
 
 		assertThat(result, is("Alexandra|Cyril|Johnny|Marion|Sophie"));
 	}
