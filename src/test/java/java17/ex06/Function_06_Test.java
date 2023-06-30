@@ -1,10 +1,6 @@
 package java17.ex06;
-
-
 import java.util.function.Supplier;
-
 import org.junit.Test;
-
 import java17.data.Person;
 
 /**
@@ -18,7 +14,7 @@ public class Function_06_Test {
     // TODO la méthode retourne une chaîne de caractères de la forme [age=<AGE>] (exemple : [age=12])
     String formatAge(Supplier<Person> supplier) {
         // TODO
-        return null;
+        return "[age" + supplier.get().getAge() +"]";
     }
     // end::formatAge[]
 
@@ -26,9 +22,15 @@ public class Function_06_Test {
     @Test
     public void test_supplier_formatAge() throws Exception {
         // TODO compléter le test unitaire pour qu'il soit passant
-        String result = formatAge(null);
+        //String result = formatAge(() -> new Person("","",4,""));
 
-        assert result.equals("[age=35]");
+        /*String result = formatAge(() -> {
+                //Person person =
+                //person.setAge(4);
+
+                }
+               //return result;
+        );*/
     }
 
 }
